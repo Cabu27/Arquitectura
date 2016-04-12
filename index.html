@@ -1,0 +1,92 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>login</title>
+<link href="../../jquery-mobile/jquery.mobile.theme-1.3.0.min.css" rel="stylesheet" type="text/css">
+<link href="../../jquery-mobile/jquery.mobile.structure-1.3.0.min.css" rel="stylesheet" type="text/css">
+<script src="../../jquery-mobile/jquery-1.11.1.min.js"></script>
+<script src="../../jquery-mobile/jquery.mobile-1.3.0.min.js"></script>
+</head>
+
+		<script>
+		
+			boton_enviar : function(){
+			alert("Bienvenido Carlos Badilla")
+			};
+			var app = {
+				initialize: function() {
+					this.bindEvents();
+				},
+		
+				bindEvents: function() {
+					var tomarFoto = document.getElementById('tomarFoto');
+					tomarFoto.addEventListener('click', app.tomarFoto, false);
+					var seleccionarFoto = document.getElementById('seleccionarFoto');
+					seleccionarFoto.addEventListener('click', app.seleccionarFoto, false);
+					var subirFoto = document.getElementById('subirFoto');
+					subirFoto.addEventListener('click', app.subirFoto, false);
+				},
+				tomarFoto: function() {
+					navigator.camera.getPicture(app.fotoExitosa, app.fotoFallo, {quality: 100, allowEdit: false,correctOrientation: true, sourceType: Camera.PictureSourceType.CAMERA});
+				},
+			    seleccionarFoto: function() {
+					navigator.camera.getPicture(app.fotoExitosa, app.fotoFallo, {quality: 100, allowEdit: true,sourceType: Camera.PictureSourceType.PHOTOLIBRARY});
+				},
+				fotoExitosa: function(direccionImagen) {
+					var imagen = document.getElementById('Foto');
+					imagen.src = direccionImagen;
+				},
+				fotoFallo: function(mensaje) {
+					alert('Error: ' + mensaje);
+				},
+				subirFoto: function() {
+					alert('Aquí tengo que ver como almacenarla en FileSystem');
+				},
+			};
+		</script>
+
+
+
+
+
+
+<body bgcolor="#7DEB42">
+<div data-role="page" id="iniciar_sesion">
+  <div data-role="header">
+    <h1>Ingrese sus datos</h1>
+  </div>
+  
+  <!--   -->
+  <div data-role="content">
+  <form id="formulario_usuario">
+  
+  <!--  Para nombre de usuario -->
+ 	<label for="text">Nombre de usuario</label>
+    <input type="text" id="nombre_usuario" name="nombre_usuario" >
+     
+  <!--  Para imagen --> 
+         <div id="content" style="margin-top: 100px;">
+                  <p><button id="tomarFoto">Tomar foto</button></p>
+                  <button id="seleccionarFoto">Seleccionar foto</button>
+				 		 <img  id="Foto"  width="120px" height="120px"  />
+                  <p><button id="subirFoto">Subir foto</button></p>
+              </div>
+        <script type="text/javascript" src="cordova.js"></script>
+        <script type="text/javascript" src="js/index.js"></script>
+        <script type="text/javascript">
+            app.initialize();
+        </script>
+        
+        
+    <a href="public/chats.html" data-role="button" id="boton_enviar" name="boton_enviar">Iniciar sesión</a> 
+    
+    </form>
+  </div>
+
+  <div data-role="footer">
+    <h4></h4>
+  </div>
+</div>
+</body>
+</html>
